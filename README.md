@@ -1,6 +1,6 @@
 # Units
 
-**TODO: Add description**
+Proper dimensional analysis and conversions
 
 ## Installation
 

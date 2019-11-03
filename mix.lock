@@ -1,0 +1,4 @@
+%{
+  "excheck": {:hex, :excheck, "0.6.0", "f8595a8ac2c0abc0d060c1a4fce7d26f41574543366a52d5f3c84de30a69747b", [:mix], [], "hexpm"},
+  "triq": {:hex, :triq, "1.3.0", "d9ed60f3cd2b6bacbb721bc9873e67e07b02e5b97c63d40db35b12670a7f1bf4", [:rebar3], [], "hexpm"},
+}
