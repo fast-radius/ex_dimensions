@@ -21,7 +21,9 @@ defmodule Units.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:ecto_sql, "~> 3.0"},
       {:excheck, "~> 0.6", only: :test},
+      {:nimble_parsec, "~> 0.5.1"},
       {:triq, "~> 1.3.0", only: :test}
     ]
   end

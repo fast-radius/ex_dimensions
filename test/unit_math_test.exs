@@ -2,7 +2,6 @@ defmodule Units.MathTest do
   use ExUnit.Case, async: false
   use ExCheck
   use Units.Math
-  alias Units.Spatial
 
   property :addition_preserves_units do
     for_all {x, y, u} in {int(), int(), oneof([Units.Spatial.Millimeters, Units.Spatial.Inches])} do
@@ -48,15 +47,13 @@ defmodule Units.MathTest do
     end
   end
 
-  property :multiplication_of_different_units_not_allowed do
+  property :multiplication_of_different_units_includes_both_units do
     for_all {x, y, u1, u2} in {int(), int(),
              oneof([Units.Spatial.Millimeters, Units.Spatial.Micrometers]),
              oneof([Units.Spatial.Inches, Units.Spatial.Feet])} do
-      try do
-        %Units.Quantity{value: x, units: [u1]} * %Units.Quantity{value: x, units: [u2]}
-      rescue
-        ArithmeticError -> true
-      end
+    
+      q = %Units.Quantity{value: x, units: [u1]} * %Units.Quantity{value: y, units: [u2]}
+      q == %Units.Quantity{value: x * y, units: [u1, u2]}
     end
   end
 
