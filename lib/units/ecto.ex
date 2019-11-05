@@ -11,12 +11,13 @@ defmodule Units.Ecto.UnitField do
   end
 
   def dump(%Units.Quantity{value: v} = quantity) do
-    %{value: v, units: to_string(quantity) |> String.split(" ") |> List.last}
+    %{value: v, units: to_string(quantity) |> String.split(" ") |> List.last()}
   end
 
   def parse(unit_str) do
     {:ok, parsed, "", _, _, _} = Units.Parser.units(unit_str)
+
     parsed
-    |> Units.Parser.extract
+    |> Units.Parser.extract()
   end
 end

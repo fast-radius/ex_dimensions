@@ -51,7 +51,6 @@ defmodule Units.MathTest do
     for_all {x, y, u1, u2} in {int(), int(),
              oneof([Units.Spatial.Millimeters, Units.Spatial.Micrometers]),
              oneof([Units.Spatial.Inches, Units.Spatial.Feet])} do
-    
       q = %Units.Quantity{value: x, units: [u1]} * %Units.Quantity{value: y, units: [u2]}
       q == %Units.Quantity{value: x * y, units: [u1, u2]}
     end
