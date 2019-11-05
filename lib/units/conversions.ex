@@ -36,6 +36,12 @@ defmodule Unit.Conversions do
       def convert(v, [Units.Spatial.Millimeters], Units.Spatial.Kilometers) do
         v / 1_000_000
       end
+      
+      # this will allow you to "eagerly" convert units consistently, even
+      # if they are the same
+      def convert(v, [u], u) do
+        v
+      end
 
       def %{value: v1, units: u, denom: []} ~> u2 do
         %{value: convert(v1, u, u2), units: [u2], denom: []}
