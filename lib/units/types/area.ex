@@ -1,4 +1,9 @@
 defmodule Units.Area do
+  @moduledoc """
+  Base units for area measurements in metric and imperial.
+  """
+  @moduledoc since: "0.1.0"
+
   def square_inches(q),
     do: %Units.Quantity{value: q, units: [Unit.Spatial.Inches, Units.Spatial.Inches]}
 

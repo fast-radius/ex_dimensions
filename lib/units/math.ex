@@ -1,4 +1,23 @@
 defmodule Units.Math do
+  @moduledoc """
+  This module contains the required macros to perform math on unit quantities.
+  It must be `use`d in the current scope for the math functions to work properly.
+  Math on standard values will still work as expected if this module is `use`d.
+
+  Using these math functions will ensure proper dimensional analysis is performed
+  on quantities.  The following rules are enforced:
+
+    * Quantities with different units may not be added or subtracted
+    * Quantities may not be added or subtracted with plain scalar numbers
+    * Quantities may be multiplied and divided with scalars
+    * Quantities with different units that are multiplied and divided will have 
+      their units changed as needed
+
+  Any math operations that violate these rules will result in an ArithmeticError
+  that will bubble up to the caller.
+  """
+  @moduledoc since: "0.1.0"
+
   defmacro __using__(_opts) do
     quote do
       import Kernel, except: [{:+, 2}, {:-, 2}, {:*, 2}, {:/, 2}]

@@ -1,8 +1,23 @@
 defmodule Units.Unit do
+  @moduledoc """
+  Base behavior for a unit type.
+  """
+  @moduledoc since: "0.1.0"
+
   @callback abbr() :: [String.t()]
 end
 
 defmodule Units.Quantity do
+  @moduledoc """
+  The core quantity type for units.  It maintains bookkeeping around unit 
+  manipulations as math and conversion operations are applied.  It is not 
+  recommended to create this struct directly.  Rather, helpers such as 
+  `Units.Spatial.inches(5)` should be used to initialize quantities, and
+  manipulations of the value should take place using the macro defined in 
+  `Units.UnitMath`.
+  """
+  @moduledoc since: "0.1.0"
+
   @enforce_keys [:value, :units]
   defstruct [:value, :units, denom: []]
 end

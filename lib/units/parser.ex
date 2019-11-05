@@ -1,4 +1,6 @@
 defmodule Units.Parser.UnitTable do
+  @moduledoc false
+
   def from_abbr("nm"), do: Units.Spatial.Nanometers
   def from_abbr("μm"), do: Units.Spatial.Micrometers
   def from_abbr("mm"), do: Units.Spatial.Millimeters
@@ -11,6 +13,8 @@ defmodule Units.Parser.UnitTable do
 end
 
 defmodule Units.Parser do
+  @moduledoc false
+
   import NimbleParsec
 
   # this defines a parser for which the following input is valid

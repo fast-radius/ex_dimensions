@@ -10,7 +10,7 @@ by adding `units` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:units, "~> 0.1.0"}
+    {:ex_units, "~> 0.1.0"}
   ]
 end
 ```

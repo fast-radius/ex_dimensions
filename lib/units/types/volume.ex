@@ -1,4 +1,9 @@
 defmodule Units.Volume do
+  @moduledoc """
+  Base units for volume measurements in metric and imperial.
+  """
+  @moduledoc since: "0.1.0"
+
   def cubic_inches(q),
     do: %Units.Quantity{value: q, units: [Units.Spatial.Inches, Units.Spatial.Inches]}
 
