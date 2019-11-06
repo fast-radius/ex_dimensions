@@ -3,7 +3,7 @@ defmodule Units.MixProject do
 
   def project do
     [
-      app: :ex_units,
+      app: :ex_dimensions,
       version: "0.1.0",
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,

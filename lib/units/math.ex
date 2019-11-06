@@ -61,6 +61,10 @@ defmodule Units.Math do
         %Units.Quantity{value: v1 / v2, units: u, denom: u2}
       end
 
+      def u ^^^ num do
+        List.duplicate(u, num)
+      end
+
       def left + right do
         Kernel.+(left, right)
       end

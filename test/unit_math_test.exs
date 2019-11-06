@@ -3,6 +3,14 @@ defmodule Units.MathTest do
   use ExCheck
   use Units.Math
 
+  test "exponent notation for conversion DSL" do
+    assert Units.Spatial.Inches ^^^ 3 == [
+             Units.Spatial.Inches,
+             Units.Spatial.Inches,
+             Units.Spatial.Inches
+           ]
+  end
+
   property :addition_preserves_units do
     for_all {x, y, u} in {int(), int(), oneof([Units.Spatial.Millimeters, Units.Spatial.Inches])} do
       %Units.Quantity{value: x, units: [u]} + %Units.Quantity{value: y, units: [u]} ==

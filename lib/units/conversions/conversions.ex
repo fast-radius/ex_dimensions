@@ -4,8 +4,8 @@ defmodule Units.Conversions do
   """
   @moduledoc since: "0.1.0"
 
-  require Units.ConversionGraph
-  @before_compile Units.ConversionGraph
+  require Units.Conversions.Graph
+  @before_compile Units.Conversions.Graph
 
   def %{value: v1, units: u, denom: []} ~> u2 when is_list(u2) do
     {:ok, value} = convert(v1, u, u2)
