@@ -58,7 +58,19 @@ defmodule Units.Math do
       end
 
       def %{value: v1, units: u, denom: []} / %{value: v2, units: u2, denom: []} do
-        %Units.Quantity{value: v1 / v2, units: u, denom: u2}
+        {units, denom} = cancel_units(u, u2)
+        %Units.Quantity{value: v1 / v2, units: units, denom: denom}
+      end
+
+      defp cancel_units(u1, u2) do
+        u2
+        |> Enum.reduce({u1, u2}, fn(u, {num, denom}) ->
+          if Enum.member?(num, u) do
+            {List.delete(num, u), List.delete(denom, u)}
+          else
+            {num, denom}
+          end
+        end)
       end
 
       def u ^^^ num do

@@ -86,7 +86,7 @@ defmodule Units.MathTest do
     end
   end
 
-  property :division_cancels_units_when_they_are_the_same do
+  property :division_completely_cancels_units_when_they_are_the_same do
     for_all {x, y, exp, u} in {int(), int(), int(),
              oneof([Units.Spatial.Millimeters, Units.Spatial.Inches])} do
       implies y > 0 do
@@ -96,5 +96,11 @@ defmodule Units.MathTest do
         end
       end
     end
+  end
+  
+  test "division partially cancels units where appropriate" do
+    q1 = %Units.Quantity{value: 6, units: [Units.Spatial.Inches, Units.Temperature.Kelvin]}
+    q2 = %Units.Quantity{value: 3, units: [Units.Temperature.Kelvin]}
+    assert q1/q2 == %Units.Quantity{value: 2.0, units: [Units.Spatial.Inches], denom: []}
   end
 end
