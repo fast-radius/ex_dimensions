@@ -1,4 +1,4 @@
-defmodule Units.Ecto.UnitField do
+defmodule ExDimensions.Ecto.UnitField do
   @moduledoc """
   A custom Ecto type for integration into Ecto based projects.
   The column is defined as a `:map` Ecto type with 2 keys:
@@ -14,21 +14,21 @@ defmodule Units.Ecto.UnitField do
   use Ecto.Type
   def type, do: :map
 
-  def cast(%Units.Quantity{} = quantity), do: {:ok, quantity}
+  def cast(%ExDimensions.Quantity{} = quantity), do: {:ok, quantity}
 
   def load(data) when is_map(data) do
     %{units: units, denom: denom} = parse(data[:units])
-    %Units.Quantity{value: data[:value], units: units, denom: denom}
+    %ExDimensions.Quantity{value: data[:value], units: units, denom: denom}
   end
 
-  def dump(%Units.Quantity{value: v} = quantity) do
+  def dump(%ExDimensions.Quantity{value: v} = quantity) do
     %{value: v, units: to_string(quantity) |> String.split(" ") |> List.last()}
   end
 
   def parse(unit_str) do
-    {:ok, parsed, "", _, _, _} = Units.Parser.units(unit_str)
+    {:ok, parsed, "", _, _, _} = ExDimensions.Parser.units(unit_str)
 
     parsed
-    |> Units.Parser.extract()
+    |> ExDimensions.Parser.extract()
   end
 end

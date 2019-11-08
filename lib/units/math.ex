@@ -1,4 +1,4 @@
-defmodule Units.Math do
+defmodule ExDimensions.Math do
   @moduledoc """
   This module contains the required macros to perform math on unit quantities.
   It must be `use`d in the current scope for the math functions to work properly.
@@ -23,25 +23,25 @@ defmodule Units.Math do
       import Kernel, except: [{:+, 2}, {:-, 2}, {:*, 2}, {:/, 2}]
 
       def %{value: v1, units: u, denom: d} + %{value: v2, units: u, denom: d} do
-        %Units.Quantity{value: v1 + v2, units: u, denom: d}
+        %ExDimensions.Quantity{value: v1 + v2, units: u, denom: d}
       end
 
       def %{value: v1, units: u, denom: d} - %{value: v2, units: u, denom: d} do
-        %Units.Quantity{value: v1 - v2, units: u, denom: d}
+        %ExDimensions.Quantity{value: v1 - v2, units: u, denom: d}
       end
 
       def %{value: v1, units: u, denom: d} * x when is_number(x) do
-        %Units.Quantity{value: v1 * x, units: u, denom: d}
+        %ExDimensions.Quantity{value: v1 * x, units: u, denom: d}
       end
 
       def %{value: v1, units: u, denom: []} *
             %{value: v2, units: u2, denom: []} do
-        %Units.Quantity{value: v1 * v2, units: u ++ u2, denom: []}
+        %ExDimensions.Quantity{value: v1 * v2, units: u ++ u2, denom: []}
       end
 
       def %{value: v1, units: u, denom: d} *
             %{value: v2, units: u2, denom: d2} do
-        %Units.Quantity{
+        %ExDimensions.Quantity{
           value: v1 * v2,
           units: u ++ u2,
           denom: d ++ d2
@@ -49,7 +49,7 @@ defmodule Units.Math do
       end
 
       def %{value: v1, units: u, denom: d} / x when is_number(x) do
-        %Units.Quantity{value: v1 / x, units: u, denom: d}
+        %ExDimensions.Quantity{value: v1 / x, units: u, denom: d}
       end
 
       def %{value: v1, units: [u | u_rest], denom: []} /
@@ -59,7 +59,7 @@ defmodule Units.Math do
 
       def %{value: v1, units: u, denom: []} / %{value: v2, units: u2, denom: []} do
         {units, denom} = cancel_units(u, u2)
-        %Units.Quantity{value: v1 / v2, units: units, denom: denom}
+        %ExDimensions.Quantity{value: v1 / v2, units: units, denom: denom}
       end
 
       defp cancel_units(u1, u2) do

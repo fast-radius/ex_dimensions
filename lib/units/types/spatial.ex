@@ -1,92 +1,92 @@
 # ----- IMPERIAL ---- #
-defmodule Units.Spatial.Inches do
+defmodule ExDimensions.Spatial.Inches do
   @moduledoc false
 
-  @behaviour Units.Unit
+  @behaviour ExDimensions.Unit
 
   def abbr, do: "in"
 end
 
-defmodule Units.Spatial.Feet do
+defmodule ExDimensions.Spatial.Feet do
   @moduledoc false
 
-  @behaviour Units.Unit
+  @behaviour ExDimensions.Unit
 
   def abbr, do: "ft"
 end
 
-defmodule Units.Spatial.Yards do
+defmodule ExDimensions.Spatial.Yards do
   @moduledoc false
 
-  @behaviour Units.Unit
+  @behaviour ExDimensions.Unit
 
   def abbr, do: "yd"
 end
 
-defmodule Units.Spatial.Miles do
+defmodule ExDimensions.Spatial.Miles do
   @moduledoc false
 
-  @behaviour Units.Unit
+  @behaviour ExDimensions.Unit
 
   def abbr, do: "mi"
 end
 
 # ----- METRIC ---- #
-defmodule Units.Spatial.Nanometers do
+defmodule ExDimensions.Spatial.Nanometers do
   @moduledoc false
 
-  @behaviour Units.Unit
+  @behaviour ExDimensions.Unit
 
   def abbr, do: "nm"
 end
 
-defmodule Units.Spatial.Micrometers do
+defmodule ExDimensions.Spatial.Micrometers do
   @moduledoc false
 
-  @behaviour Units.Unit
+  @behaviour ExDimensions.Unit
 
   def abbr, do: "μm"
 end
 
-defmodule Units.Spatial.Millimeters do
+defmodule ExDimensions.Spatial.Millimeters do
   @moduledoc false
 
-  @behaviour Units.Unit
+  @behaviour ExDimensions.Unit
 
   def abbr, do: "mm"
 end
 
-defmodule Units.Spatial.Meters do
+defmodule ExDimensions.Spatial.Meters do
   @moduledoc false
 
-  @behaviour Units.Unit
+  @behaviour ExDimensions.Unit
 
   def abbr, do: "m"
 end
 
-defmodule Units.Spatial.Kilometers do
+defmodule ExDimensions.Spatial.Kilometers do
   @moduledoc false
 
-  @behaviour Units.Unit
+  @behaviour ExDimensions.Unit
 
   def abbr, do: "km"
 end
 
-defmodule Units.Spatial do
+defmodule ExDimensions.Spatial do
   @moduledoc """
   Base units for spatial measurements in metric and imperial.  See
-  `Units.Spatial.Area` and `Units.Spatial.Volume` for helpers that can create
+  `ExDimensions.Spatial.Area` and `ExDimensions.Spatial.Volume` for helpers that can create
   quantities in square and cubed units.
   """
   @moduledoc since: "0.1.0"
 
-  def inches(q), do: %Units.Quantity{value: q, units: [Units.Spatial.Inches]}
-  def feet(q), do: %Units.Quantity{value: q, units: [Units.Spatial.Feet]}
-  def yards(q), do: %Units.Quantity{value: q, units: [Units.Spatial.Yards]}
-  def miles(q), do: %Units.Quantity{value: q, units: [Units.Spatial.Miles]}
-  def nanometers(q), do: %Units.Quantity{value: q, units: [Units.Spatial.Nanometers]}
-  def micrometers(q), do: %Units.Quantity{value: q, units: [Units.Spatial.Micrometers]}
-  def millimeters(q), do: %Units.Quantity{value: q, units: [Units.Spatial.Millimeters]}
-  def meters(q), do: %Units.Quantity{value: q, units: [Units.Spatial.Meters]}
-  def kilometers(q), do: %Units.Quantity{value: q, units: [Units.Spatial.Kilometers]}
+  def inches(q), do: %ExDimensions.Quantity{value: q, units: [ExDimensions.Spatial.Inches]}
+  def feet(q), do: %ExDimensions.Quantity{value: q, units: [ExDimensions.Spatial.Feet]}
+  def yards(q), do: %ExDimensions.Quantity{value: q, units: [ExDimensions.Spatial.Yards]}
+  def miles(q), do: %ExDimensions.Quantity{value: q, units: [ExDimensions.Spatial.Miles]}
+  def nanometers(q), do: %ExDimensions.Quantity{value: q, units: [ExDimensions.Spatial.Nanometers]}
+  def micrometers(q), do: %ExDimensions.Quantity{value: q, units: [ExDimensions.Spatial.Micrometers]}
+  def millimeters(q), do: %ExDimensions.Quantity{value: q, units: [ExDimensions.Spatial.Millimeters]}
+  def meters(q), do: %ExDimensions.Quantity{value: q, units: [ExDimensions.Spatial.Meters]}
+  def kilometers(q), do: %ExDimensions.Quantity{value: q, units: [ExDimensions.Spatial.Kilometers]}
 end

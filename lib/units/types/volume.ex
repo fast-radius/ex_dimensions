@@ -1,27 +1,27 @@
-defmodule Units.Volume do
+defmodule ExDimensions.Volume do
   @moduledoc """
   Base units for volume measurements in metric and imperial.
   """
   @moduledoc since: "0.1.0"
 
   def cubic_inches(q),
-    do: %Units.Quantity{value: q, units: [Units.Spatial.Inches, Units.Spatial.Inches, Units.Spatial.Inches]}
+    do: %ExDimensions.Quantity{value: q, units: [ExDimensions.Spatial.Inches, ExDimensions.Spatial.Inches, ExDimensions.Spatial.Inches]}
 
   def cubic_feet(q),
-    do: %Units.Quantity{
+    do: %ExDimensions.Quantity{
       value: q,
-      units: [Units.Spatial.Feet, Units.Spatial.Feet, Units.Spatial.Feet]
+      units: [ExDimensions.Spatial.Feet, ExDimensions.Spatial.Feet, ExDimensions.Spatial.Feet]
     }
 
   def mm_cubed(q),
-    do: %Units.Quantity{
+    do: %ExDimensions.Quantity{
       value: q,
-      units: [Units.Spatial.Millimeters, Units.Spatial.Millimeters, Units.Spatial.Millimeters]
+      units: [ExDimensions.Spatial.Millimeters, ExDimensions.Spatial.Millimeters, ExDimensions.Spatial.Millimeters]
     }
 
   def m_cubed(q),
-    do: %Units.Quantity{
+    do: %ExDimensions.Quantity{
       value: q,
-      units: [Units.Spatial.Meters, Units.Spatial.Meters, Units.Spatial.Meters]
+      units: [ExDimensions.Spatial.Meters, ExDimensions.Spatial.Meters, ExDimensions.Spatial.Meters]
     }
 end

@@ -1,11 +1,11 @@
-defmodule Units.Conversions do
+defmodule ExDimensions.Conversions do
   @moduledoc """
   A module containing the DSL definitions for unit conversions
   """
   @moduledoc since: "0.1.0"
 
-  require Units.Conversions.Graph
-  @before_compile Units.Conversions.Graph
+  require ExDimensions.Conversions.Graph
+  @before_compile ExDimensions.Conversions.Graph
 
   def %{value: v1, units: u, denom: []} ~> u2 when is_list(u2) do
     {:ok, value} = convert(v1, u, u2)
@@ -21,8 +21,8 @@ defmodule Units.Conversions do
 
   ## Examples
 
-      iex> import Units.Conversions
-      iex> IO.puts(Units.Spatial.feet(1) ~> Units.Spatial.Inches)
+      iex> import ExDimensions.Conversions
+      iex> IO.puts(ExDimensions.Spatial.feet(1) ~> ExDimensions.Spatial.Inches)
       "12 in"
   """
   @doc since: "0.1.0"

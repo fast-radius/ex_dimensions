@@ -1,34 +1,34 @@
-defmodule Units.Temperature.Celsius do
+defmodule ExDimensions.Temperature.Celsius do
   @moduledoc false
 
-  @behaviour Units.Unit
+  @behaviour ExDimensions.Unit
 
   def abbr, do: "°C"
 end
 
-defmodule Units.Temperature.Kelvin do
+defmodule ExDimensions.Temperature.Kelvin do
   @moduledoc false
 
-  @behaviour Units.Unit
+  @behaviour ExDimensions.Unit
 
   def abbr, do: "K"
 end
 
-defmodule Units.Temperature.Fahrenheit do
+defmodule ExDimensions.Temperature.Fahrenheit do
   @moduledoc false
 
-  @behaviour Units.Unit
+  @behaviour ExDimensions.Unit
 
   def abbr, do: "°F"
 end
 
-defmodule Units.Temperature do
+defmodule ExDimensions.Temperature do
   @moduledoc """
   Base units for temperature measurements.
   """
   @moduledoc since: "0.1.0"
 
-  def celsius(q), do: %Units.Quantity{value: q, units: [Units.Temperature.Celsius]}
-  def kelvin(q), do: %Units.Quantity{value: q, units: [Units.Temperature.Kelvin]}
-  def fahrenheit(q), do: %Units.Quantity{value: q, units: [Units.Temperature.Fahrenheit]}
+  def celsius(q), do: %ExDimensions.Quantity{value: q, units: [ExDimensions.Temperature.Celsius]}
+  def kelvin(q), do: %ExDimensions.Quantity{value: q, units: [ExDimensions.Temperature.Kelvin]}
+  def fahrenheit(q), do: %ExDimensions.Quantity{value: q, units: [ExDimensions.Temperature.Fahrenheit]}
 end

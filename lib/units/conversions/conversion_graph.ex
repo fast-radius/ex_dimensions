@@ -1,11 +1,11 @@
-defmodule Units.Conversions.Graph do
+defmodule ExDimensions.Conversions.Graph do
   @moduledoc false
 
   defmacro __before_compile__(%Macro.Env{module: module}) do
     conversion_mappings =
-      Units.Conversions.Spatial.mappings() ++
-        Units.Conversions.Area.mappings() ++
-        Units.Conversions.Temperature.mappings()
+      ExDimensions.Conversions.Spatial.mappings() ++
+        ExDimensions.Conversions.Area.mappings() ++
+        ExDimensions.Conversions.Temperature.mappings()
 
     Module.put_attribute(
       module,

@@ -1,4 +1,4 @@
-defmodule Units.Conversions.Temperature do
+defmodule ExDimensions.Conversions.Temperature do
   @moduledoc false
 
   def celsius_fahrenheit(v, f) do
@@ -13,10 +13,10 @@ defmodule Units.Conversions.Temperature do
     do: [
       # conversion functions are decomposed into lists so they can be stored in
       # a module attribute
-      {[Units.Temperature.Kelvin], [&Kernel.-/2, 273.15], [&Kernel.+/2, 273.15],
-       [Units.Temperature.Celsius]},
-      {[Units.Temperature.Fahrenheit], [&Units.Conversions.Temperature.fahrenheit_celsius/2, 32],
-       [&Units.Conversions.Temperature.celsius_fahrenheit/2, 0.55555],
-       [Units.Temperature.Celsius]}
+      {[ExDimensions.Temperature.Kelvin], [&Kernel.-/2, 273.15], [&Kernel.+/2, 273.15],
+       [ExDimensions.Temperature.Celsius]},
+      {[ExDimensions.Temperature.Fahrenheit], [&ExDimensions.Conversions.Temperature.fahrenheit_celsius/2, 32],
+       [&ExDimensions.Conversions.Temperature.celsius_fahrenheit/2, 0.55555],
+       [ExDimensions.Temperature.Celsius]}
     ]
 end
