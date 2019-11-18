@@ -1,6 +1,6 @@
-# Units
+# ex_dimensions
 
-Proper dimensional analysis and conversions
+Dimensional analysis and unit conversions for Elixir.
 
 ## Installation
 
@@ -10,7 +10,7 @@ by adding `units` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:units, "~> 0.1.0"}
+    {:ex_dimensions, "~> 0.1.0"}
   ]
 end
 ```

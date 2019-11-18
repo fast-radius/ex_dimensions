@@ -1,13 +1,28 @@
-defmodule Units.Unit do
+defmodule ExDimensions.Unit do
+  @moduledoc """
+  Base behavior for a unit type.
+  """
+  @moduledoc since: "0.1.0"
+
   @callback abbr() :: [String.t()]
 end
 
-defmodule Units.Quantity do
+defmodule ExDimensions.Quantity do
+  @moduledoc """
+  The core quantity type for units.  It maintains bookkeeping around unit 
+  manipulations as math and conversion operations are applied.  It is not 
+  recommended to create this struct directly.  Rather, helpers such as 
+  `ExDimensions.Spatial.inches(5)` should be used to initialize quantities, and
+  manipulations of the value should take place using the macro defined in 
+  `ExDimensions.UnitMath`.
+  """
+  @moduledoc since: "0.1.0"
+
   @enforce_keys [:value, :units]
   defstruct [:value, :units, denom: []]
 end
 
-defimpl String.Chars, for: Units.Quantity do
+defimpl String.Chars, for: ExDimensions.Quantity do
   def to_string(%{value: v, units: [u], denom: []}) do
     "#{v} #{u.abbr}"
   end
