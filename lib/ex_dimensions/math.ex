@@ -64,7 +64,7 @@ defmodule ExDimensions.Math do
 
       defp cancel_units(u1, u2) do
         u2
-        |> Enum.reduce({u1, u2}, fn(u, {num, denom}) ->
+        |> Enum.reduce({u1, u2}, fn u, {num, denom} ->
           if Enum.member?(num, u) do
             {List.delete(num, u), List.delete(denom, u)}
           else

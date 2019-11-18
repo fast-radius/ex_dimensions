@@ -12,7 +12,8 @@ defmodule ExDimensions.MathTest do
   end
 
   property :addition_preserves_units do
-    for_all {x, y, u} in {int(), int(), oneof([ExDimensions.Spatial.Millimeters, ExDimensions.Spatial.Inches])} do
+    for_all {x, y, u} in {int(), int(),
+             oneof([ExDimensions.Spatial.Millimeters, ExDimensions.Spatial.Inches])} do
       %ExDimensions.Quantity{value: x, units: [u]} + %ExDimensions.Quantity{value: y, units: [u]} ==
         %ExDimensions.Quantity{denom: [], units: [u], value: x + y}
     end
@@ -31,7 +32,8 @@ defmodule ExDimensions.MathTest do
   end
 
   property :subtraction_preserves_units do
-    for_all {x, y, u} in {int(), int(), oneof([ExDimensions.Spatial.Millimeters, ExDimensions.Spatial.Inches])} do
+    for_all {x, y, u} in {int(), int(),
+             oneof([ExDimensions.Spatial.Millimeters, ExDimensions.Spatial.Inches])} do
       %ExDimensions.Quantity{value: x, units: [u]} - %ExDimensions.Quantity{value: y, units: [u]} ==
         %ExDimensions.Quantity{denom: [], units: [u], value: x - y}
     end
@@ -50,8 +52,12 @@ defmodule ExDimensions.MathTest do
   end
 
   property :scalar_multiplication_preserves_units do
-    for_all {x, y, u} in {int(), int(), oneof([ExDimensions.Spatial.Millimeters, ExDimensions.Spatial.Inches])} do
-      %ExDimensions.Quantity{value: x, units: [u]} * y == %ExDimensions.Quantity{value: x * y, units: [u]}
+    for_all {x, y, u} in {int(), int(),
+             oneof([ExDimensions.Spatial.Millimeters, ExDimensions.Spatial.Inches])} do
+      %ExDimensions.Quantity{value: x, units: [u]} * y == %ExDimensions.Quantity{
+        value: x * y,
+        units: [u]
+      }
     end
   end
 
@@ -59,7 +65,10 @@ defmodule ExDimensions.MathTest do
     for_all {x, y, u1, u2} in {int(), int(),
              oneof([ExDimensions.Spatial.Millimeters, ExDimensions.Spatial.Micrometers]),
              oneof([ExDimensions.Spatial.Inches, ExDimensions.Spatial.Feet])} do
-      q = %ExDimensions.Quantity{value: x, units: [u1]} * %ExDimensions.Quantity{value: y, units: [u2]}
+      q =
+        %ExDimensions.Quantity{value: x, units: [u1]} *
+          %ExDimensions.Quantity{value: y, units: [u2]}
+
       q == %ExDimensions.Quantity{value: x * y, units: [u1, u2]}
     end
   end
@@ -69,19 +78,24 @@ defmodule ExDimensions.MathTest do
              oneof([ExDimensions.Spatial.Millimeters, ExDimensions.Spatial.Inches])} do
       implies exp > 0 do
         %ExDimensions.Quantity{value: x, units: List.duplicate(u, exp)} *
-          %ExDimensions.Quantity{value: y, units: List.duplicate(u, exp)} == %ExDimensions.Quantity{
-          denom: [],
-          units: List.duplicate(u, exp * 2),
-          value: x * y
-        }
+          %ExDimensions.Quantity{value: y, units: List.duplicate(u, exp)} ==
+          %ExDimensions.Quantity{
+            denom: [],
+            units: List.duplicate(u, exp * 2),
+            value: x * y
+          }
       end
     end
   end
 
   property :scalar_division_preserves_units do
-    for_all {x, y, u} in {int(), int(), oneof([ExDimensions.Spatial.Millimeters, ExDimensions.Spatial.Inches])} do
+    for_all {x, y, u} in {int(), int(),
+             oneof([ExDimensions.Spatial.Millimeters, ExDimensions.Spatial.Inches])} do
       implies y > 0 do
-        %ExDimensions.Quantity{value: x, units: [u]} / y == %ExDimensions.Quantity{value: x / y, units: [u]}
+        %ExDimensions.Quantity{value: x, units: [u]} / y == %ExDimensions.Quantity{
+          value: x / y,
+          units: [u]
+        }
       end
     end
   end
@@ -97,10 +111,19 @@ defmodule ExDimensions.MathTest do
       end
     end
   end
-  
+
   test "division partially cancels units where appropriate" do
-    q1 = %ExDimensions.Quantity{value: 6, units: [ExDimensions.Spatial.Inches, ExDimensions.Temperature.Kelvin]}
+    q1 = %ExDimensions.Quantity{
+      value: 6,
+      units: [ExDimensions.Spatial.Inches, ExDimensions.Temperature.Kelvin]
+    }
+
     q2 = %ExDimensions.Quantity{value: 3, units: [ExDimensions.Temperature.Kelvin]}
-    assert q1/q2 == %ExDimensions.Quantity{value: 2.0, units: [ExDimensions.Spatial.Inches], denom: []}
+
+    assert q1 / q2 == %ExDimensions.Quantity{
+             value: 2.0,
+             units: [ExDimensions.Spatial.Inches],
+             denom: []
+           }
   end
 end

@@ -84,9 +84,18 @@ defmodule ExDimensions.Spatial do
   def feet(q), do: %ExDimensions.Quantity{value: q, units: [ExDimensions.Spatial.Feet]}
   def yards(q), do: %ExDimensions.Quantity{value: q, units: [ExDimensions.Spatial.Yards]}
   def miles(q), do: %ExDimensions.Quantity{value: q, units: [ExDimensions.Spatial.Miles]}
-  def nanometers(q), do: %ExDimensions.Quantity{value: q, units: [ExDimensions.Spatial.Nanometers]}
-  def micrometers(q), do: %ExDimensions.Quantity{value: q, units: [ExDimensions.Spatial.Micrometers]}
-  def millimeters(q), do: %ExDimensions.Quantity{value: q, units: [ExDimensions.Spatial.Millimeters]}
+
+  def nanometers(q),
+    do: %ExDimensions.Quantity{value: q, units: [ExDimensions.Spatial.Nanometers]}
+
+  def micrometers(q),
+    do: %ExDimensions.Quantity{value: q, units: [ExDimensions.Spatial.Micrometers]}
+
+  def millimeters(q),
+    do: %ExDimensions.Quantity{value: q, units: [ExDimensions.Spatial.Millimeters]}
+
   def meters(q), do: %ExDimensions.Quantity{value: q, units: [ExDimensions.Spatial.Meters]}
-  def kilometers(q), do: %ExDimensions.Quantity{value: q, units: [ExDimensions.Spatial.Kilometers]}
+
+  def kilometers(q),
+    do: %ExDimensions.Quantity{value: q, units: [ExDimensions.Spatial.Kilometers]}
 end
