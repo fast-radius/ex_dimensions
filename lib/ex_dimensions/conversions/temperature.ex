@@ -15,7 +15,8 @@ defmodule ExDimensions.Conversions.Temperature do
       # a module attribute
       {[ExDimensions.Temperature.Kelvin], [&Kernel.-/2, 273.15], [&Kernel.+/2, 273.15],
        [ExDimensions.Temperature.Celsius]},
-      {[ExDimensions.Temperature.Fahrenheit], [&ExDimensions.Conversions.Temperature.fahrenheit_celsius/2, 32],
+      {[ExDimensions.Temperature.Fahrenheit],
+       [&ExDimensions.Conversions.Temperature.fahrenheit_celsius/2, 32],
        [&ExDimensions.Conversions.Temperature.celsius_fahrenheit/2, 0.55555],
        [ExDimensions.Temperature.Celsius]}
     ]

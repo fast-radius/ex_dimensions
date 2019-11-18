@@ -3,7 +3,12 @@ defmodule ExDimensions.EctoUnitFieldTest do
 
   test "deserialization of a basic unit" do
     quantity = ExDimensions.Ecto.UnitField.load(%{value: 43, units: "ft"})
-    assert quantity == %ExDimensions.Quantity{value: 43, units: [ExDimensions.Spatial.Feet], denom: []}
+
+    assert quantity == %ExDimensions.Quantity{
+             value: 43,
+             units: [ExDimensions.Spatial.Feet],
+             denom: []
+           }
   end
 
   test "deserialization of a complex unit" do

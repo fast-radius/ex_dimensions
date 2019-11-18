@@ -22,6 +22,15 @@ defmodule ExDimensions.Quantity do
   defstruct [:value, :units, denom: []]
 end
 
+defimpl Jason.Encoder, for: ExDimensions.Quantity do
+  def encode(value, opts) do
+    Jason.Encode.map(
+      ExDimensions.Ecto.UnitField.dump(value),
+      opts
+    )
+  end
+end
+
 defimpl String.Chars, for: ExDimensions.Quantity do
   def to_string(%{value: v, units: [u], denom: []}) do
     "#{v} #{u.abbr}"

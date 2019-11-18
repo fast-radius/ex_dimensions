@@ -22,4 +22,11 @@ defmodule ExDimensions.QuantityTest do
     u2 = u / (ExDimensions.Spatial.feet(6) * ExDimensions.Spatial.feet(6))
     assert to_string(u2) == "1.0 in^1/ft^2"
   end
+  
+  test "to JSON of a rational unit" do
+    u = ExDimensions.Spatial.inches(6)
+    u2 = u / ExDimensions.Spatial.feet(10)
+    assert Jason.encode!(u2) == "{\"units\":\"in/ft\",\"value\":0.6}" 
+  end
+
 end

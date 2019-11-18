@@ -5,7 +5,14 @@ defmodule ExDimensions.Volume do
   @moduledoc since: "0.1.0"
 
   def cubic_inches(q),
-    do: %ExDimensions.Quantity{value: q, units: [ExDimensions.Spatial.Inches, ExDimensions.Spatial.Inches, ExDimensions.Spatial.Inches]}
+    do: %ExDimensions.Quantity{
+      value: q,
+      units: [
+        ExDimensions.Spatial.Inches,
+        ExDimensions.Spatial.Inches,
+        ExDimensions.Spatial.Inches
+      ]
+    }
 
   def cubic_feet(q),
     do: %ExDimensions.Quantity{
@@ -16,12 +23,20 @@ defmodule ExDimensions.Volume do
   def mm_cubed(q),
     do: %ExDimensions.Quantity{
       value: q,
-      units: [ExDimensions.Spatial.Millimeters, ExDimensions.Spatial.Millimeters, ExDimensions.Spatial.Millimeters]
+      units: [
+        ExDimensions.Spatial.Millimeters,
+        ExDimensions.Spatial.Millimeters,
+        ExDimensions.Spatial.Millimeters
+      ]
     }
 
   def m_cubed(q),
     do: %ExDimensions.Quantity{
       value: q,
-      units: [ExDimensions.Spatial.Meters, ExDimensions.Spatial.Meters, ExDimensions.Spatial.Meters]
+      units: [
+        ExDimensions.Spatial.Meters,
+        ExDimensions.Spatial.Meters,
+        ExDimensions.Spatial.Meters
+      ]
     }
 end

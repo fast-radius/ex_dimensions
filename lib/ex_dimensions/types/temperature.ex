@@ -30,5 +30,7 @@ defmodule ExDimensions.Temperature do
 
   def celsius(q), do: %ExDimensions.Quantity{value: q, units: [ExDimensions.Temperature.Celsius]}
   def kelvin(q), do: %ExDimensions.Quantity{value: q, units: [ExDimensions.Temperature.Kelvin]}
-  def fahrenheit(q), do: %ExDimensions.Quantity{value: q, units: [ExDimensions.Temperature.Fahrenheit]}
+
+  def fahrenheit(q),
+    do: %ExDimensions.Quantity{value: q, units: [ExDimensions.Temperature.Fahrenheit]}
 end
