@@ -22,7 +22,7 @@ defmodule ExDimensions.Ecto.UnitField do
   end
 
   def dump(%ExDimensions.Quantity{value: v} = quantity) do
-    %{value: v, units: to_string(quantity) |> String.split(" ") |> List.last()}
+    {:ok, %{value: v, units: to_string(quantity) |> String.split(" ") |> List.last()}}
   end
 
   def parse(unit_str) do
