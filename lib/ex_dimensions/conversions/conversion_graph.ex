@@ -7,7 +7,6 @@ defmodule ExDimensions.Conversions.Graph do
         ExDimensions.Conversions.Area.mappings() ++
         ExDimensions.Conversions.Volume.mappings() ++
         ExDimensions.Conversions.Temperature.mappings()
-   IO.inspect(conversion_mappings)
 
     Module.put_attribute(
       module,
