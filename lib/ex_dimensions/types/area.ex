@@ -7,7 +7,7 @@ defmodule ExDimensions.Area do
   def square_inches(q),
     do: %ExDimensions.Quantity{
       value: q,
-      units: [Unit.Spatial.Inches, ExDimensions.Spatial.Inches]
+      units: [ExDimensions.Spatial.Inches, ExDimensions.Spatial.Inches]
     }
 
   def square_feet(q),

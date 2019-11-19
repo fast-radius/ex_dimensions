@@ -2,7 +2,7 @@ defmodule ExDimensions.EctoUnitFieldTest do
   use ExUnit.Case
 
   test "deserialization of a basic unit" do
-    quantity = ExDimensions.Ecto.UnitField.load(%{value: 43, units: "ft"})
+    {:ok, quantity} = ExDimensions.Ecto.UnitField.load(%{"value" => 43, "units" => "ft"})
 
     assert quantity == %ExDimensions.Quantity{
              value: 43,
@@ -12,7 +12,7 @@ defmodule ExDimensions.EctoUnitFieldTest do
   end
 
   test "deserialization of a complex unit" do
-    quantity = ExDimensions.Ecto.UnitField.load(%{value: 43, units: "ft^2/m^2in^3"})
+    {:ok, quantity} = ExDimensions.Ecto.UnitField.load(%{"value" => 43, "units" => "ft^2/m^2in^3"})
 
     assert quantity == %ExDimensions.Quantity{
              denom: [

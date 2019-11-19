@@ -25,7 +25,7 @@ end
 defimpl Jason.Encoder, for: ExDimensions.Quantity do
   def encode(value, opts) do
     Jason.Encode.map(
-      ExDimensions.Ecto.UnitField.dump(value),
+      ExDimensions.Ecto.UnitField.dump(value) |> elem(1),
       opts
     )
   end
