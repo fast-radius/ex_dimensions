@@ -18,7 +18,7 @@ defmodule ExDimensions.Ecto.UnitField do
 
   def load(data) when is_map(data) do
     %{units: units, denom: denom} = parse(data[:units])
-    %ExDimensions.Quantity{value: data[:value], units: units, denom: denom}
+    {:ok, %ExDimensions.Quantity{value: data[:value], units: units, denom: denom}}
   end
 
   def dump(%ExDimensions.Quantity{value: v} = quantity) do
