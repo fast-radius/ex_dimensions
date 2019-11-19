@@ -15,6 +15,9 @@ defmodule ExDimensions.Ecto.UnitField do
   def type, do: :map
 
   def cast(%ExDimensions.Quantity{} = quantity), do: {:ok, quantity}
+  def cast(%{"denom" => denom, "units" => units, "value" => value}) do 
+    {:ok, %ExDimensions.Quantity{denom: denom, units: units, value: value}}
+  end
 
   def load(data) when is_map(data) do
     %{units: units, denom: denom} = parse(data["units"])
