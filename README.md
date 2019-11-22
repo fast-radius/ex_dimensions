@@ -1,5 +1,7 @@
 # ex_dimensions
 
+![CircleCI](https://github.com/fast-radius/ex_dimensions/workflows/Elixir%20CI/badge.svg)
+
 Dimensional analysis and unit conversions for Elixir.
 
 Quickstart:
