@@ -9,7 +9,10 @@ defmodule Units.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       name: "ExDimensions",
-      docs: [main: "ExDimensions"]
+      docs: [main: "ExDimensions"],
+      package: package(),
+      description: "Dimensional analysis and unit conversions for Elixir.",
+      source_url: "https://github.com/fast-radius/ex_dimensions"
     ]
   end
 
@@ -30,6 +33,14 @@ defmodule Units.MixProject do
       {:libgraph, "~> 0.13.3"},
       {:nimble_parsec, "~> 0.5.1"},
       {:triq, "~> 1.3.0", only: :test}
+    ]
+  end
+
+  defp package do
+    [
+      name: "ex_dimensions",
+      licenses: ["BSD-3-Clause"],
+      links: %{"GitHub" => "https://github.com/fast-radius/ex_dimensions"}
     ]
   end
 end
