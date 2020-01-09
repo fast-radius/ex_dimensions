@@ -20,7 +20,18 @@ defmodule ExDimensions.Math do
 
   defmacro __using__(_opts) do
     quote do
-      import Kernel, except: [{:+, 2}, {:-, 2}, {:*, 2}, {:/, 2}]
+      import Kernel,
+        except: [
+          {:+, 2},
+          {:-, 2},
+          {:*, 2},
+          {:/, 2},
+          {:<, 2},
+          {:<=, 2},
+          {:>, 2},
+          {:>=, 2},
+          {:==, 2}
+        ]
 
       def %{value: v1, units: u, denom: d} + %{value: v2, units: u, denom: d} do
         %ExDimensions.Quantity{value: v1 + v2, units: u, denom: d}
@@ -62,6 +73,26 @@ defmodule ExDimensions.Math do
         %ExDimensions.Quantity{value: v1 / v2, units: units, denom: denom}
       end
 
+      def %{value: v1, units: u, denom: d} > %{value: v2, units: u, denom: d} do
+        v1 > v2
+      end
+
+      def %{value: v1, units: u, denom: d} >= %{value: v2, units: u, denom: d} do
+        v1 >= v2
+      end
+
+      def %{value: v1, units: u, denom: d} < %{value: v2, units: u, denom: d} do
+        v1 < v2
+      end
+
+      def %{value: v1, units: u, denom: d} <= %{value: v2, units: u, denom: d} do
+        v1 <= v2
+      end
+
+      def %{value: v1, units: u, denom: d} == %{value: v2, units: u, denom: d} do
+        v1 == v2
+      end
+
       defp cancel_units(u1, u2) do
         u2
         |> Enum.reduce({u1, u2}, fn u, {num, denom} ->
@@ -91,6 +122,26 @@ defmodule ExDimensions.Math do
 
       def left / right do
         Kernel./(left, right)
+      end
+
+      def left < right do
+        Kernel.<(left, right)
+      end
+
+      def left <= right do
+        Kernel.<=(left, right)
+      end
+
+      def left > right do
+        Kernel.>(left, right)
+      end
+
+      def left >= right do
+        Kernel.>=(left, right)
+      end
+
+      def left == right do
+        Kernel.==(left, right)
       end
     end
   end
