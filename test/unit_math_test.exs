@@ -126,4 +126,24 @@ defmodule ExDimensions.MathTest do
              denom: []
            }
   end
+
+  property :comparison_is_correct do
+    for_all {x, y, u} in {int(), int(),
+             oneof([ExDimensions.Spatial.Millimeters, ExDimensions.Spatial.Inches])} do
+      %ExDimensions.Quantity{value: x, units: [u]} < %ExDimensions.Quantity{value: y, units: [u]} ==
+        x < y
+
+      %ExDimensions.Quantity{value: x, units: [u]} <= %ExDimensions.Quantity{value: y, units: [u]} ==
+        x <= y
+
+      %ExDimensions.Quantity{value: x, units: [u]} > %ExDimensions.Quantity{value: y, units: [u]} ==
+        x > y
+
+      %ExDimensions.Quantity{value: x, units: [u]} >= %ExDimensions.Quantity{value: y, units: [u]} ==
+        x >= y
+
+      %ExDimensions.Quantity{value: x, units: [u]} == %ExDimensions.Quantity{value: y, units: [u]} ==
+        (x == y)
+    end
+  end
 end

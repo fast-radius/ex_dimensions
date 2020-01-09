@@ -7,7 +7,7 @@ defmodule ExDimension.ConversionTest do
     u = ExDimensions.Spatial.inches(4)
     assert (u ~> ExDimensions.Spatial.Millimeters).value == 101.6
   end
-  
+
   test "convert complex units to another" do
     u = ExDimensions.Area.square_inches(4)
     assert (u ~> (ExDimensions.Spatial.Millimeters ^^^ 2)).value == 2580.64
