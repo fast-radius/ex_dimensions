@@ -7,9 +7,13 @@ defmodule ExDimensions.Conversions do
   require ExDimensions.Conversions.Graph
   @before_compile ExDimensions.Conversions.Graph
 
-  def %{value: v1, units: u, denom: []} ~> u2 when is_list(u2) do
-    {:ok, value} = convert(v1, u, u2)
-    %{value: value, units: u2, denom: []}
+  alias ExDimensions.Quantity
+
+  def %Quantity{value: v1, units: u, denom: []} ~> u2 when is_list(u2) do
+    case convert(v1, u, u2) do
+      {:ok, value} -> %Quantity{value: value, units: u2, denom: []}
+      err -> err
+    end
   end
 
   @doc """
@@ -26,9 +30,9 @@ defmodule ExDimensions.Conversions do
       "12 in"
   """
   @doc since: "0.1.0"
-  def %{value: v1, units: u, denom: []} ~> u2 do
+  def %Quantity{value: v1, units: u, denom: []} ~> u2 do
     case convert(v1, u, [u2]) do
-      {:ok, value} -> %{value: value, units: [u2], denom: []}
+      {:ok, value} -> %Quantity{value: value, units: [u2], denom: []}
       err -> err
     end
   end
