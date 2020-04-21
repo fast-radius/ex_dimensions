@@ -37,4 +37,14 @@ defmodule ExDimension.ConversionTest do
              ]
            } = mm_cu
   end
+  
+  test "convert mass units" do
+    pounds = ExDimensions.Mass.pounds(4)
+    kgs = pounds ~> ExDimensions.Mass.Kilograms
+
+    assert %Quantity{
+             value: 1.8140589569160996,
+             units: [ExDimensions.Mass.Kilograms]
+           } = kgs
+  end
 end
