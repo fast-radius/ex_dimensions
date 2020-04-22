@@ -18,6 +18,12 @@ defmodule ExDimensions.Conversions.Volume do
          ExDimensions.Spatial.Millimeters,
          ExDimensions.Spatial.Millimeters,
          ExDimensions.Spatial.Millimeters
+       ], [&Kernel.//2, 1000], [&Kernel.*/2, 1000],
+       [ExDimensions.Spatial.Centimeters, ExDimensions.Spatial.Centimeters, ExDimensions.Spatial.Centimeters]},
+      {[
+         ExDimensions.Spatial.Millimeters,
+         ExDimensions.Spatial.Millimeters,
+         ExDimensions.Spatial.Millimeters
        ], [&Kernel.//2, 1.0e+9], [&Kernel.*/2, 1.0e+9],
        [ExDimensions.Spatial.Meters, ExDimensions.Spatial.Meters, ExDimensions.Spatial.Meters]}
     ]

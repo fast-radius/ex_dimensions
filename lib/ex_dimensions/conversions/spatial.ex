@@ -17,7 +17,9 @@ defmodule ExDimensions.Conversions.Spatial do
        [ExDimensions.Spatial.Nanometers]},
       {[ExDimensions.Spatial.Millimeters], [&Kernel.*/2, 1000], [&Kernel.//2, 1000],
        [ExDimensions.Spatial.Micrometers]},
-      {[ExDimensions.Spatial.Millimeters], [&Kernel.//2, 1000], [&Kernel.*/2, 1000],
+      {[ExDimensions.Spatial.Millimeters], [&Kernel.//2, 10], [&Kernel.*/2, 10],
+       [ExDimensions.Spatial.Centimeters]},
+      {[ExDimensions.Spatial.Centimeters], [&Kernel.//2, 100], [&Kernel.*/2, 100],
        [ExDimensions.Spatial.Meters]},
       {[ExDimensions.Spatial.Meters], [&Kernel.//2, 1000], [&Kernel.*/2, 1000],
        [ExDimensions.Spatial.Kilometers]}
