@@ -36,18 +36,6 @@ defmodule ExDimension.ConversionTest do
                ExDimensions.Spatial.Millimeters
              ]
            } = mm_cu
-
-    # cm_cu = ExDimensions.Volume.cm_cubed(4)
-    # mm_cu = cm_cu ~> (ExDimensions.Spatial.Milimeters ^^^ 3)
-
-    # assert %Quantity{
-    #          value: 4000.0,
-    #          units: [
-    #            ExDimensions.Spatial.Millimeters,
-    #            ExDimensions.Spatial.Millimeters,
-    #            ExDimensions.Spatial.Millimeters
-    #          ]
-    #        } = mm_cu
   end
 
   test "convert mass units" do
