@@ -10,7 +10,7 @@ defmodule ExDimensions.Math do
     * Quantities with different units may not be added or subtracted
     * Quantities may not be added or subtracted with plain scalar numbers
     * Quantities may be multiplied and divided with scalars
-    * Quantities with different units that are multiplied and divided will have 
+    * Quantities with different units that are multiplied and divided will have
       their units changed as needed
 
   Any math operations that violate these rules will result in an ArithmeticError
@@ -47,15 +47,17 @@ defmodule ExDimensions.Math do
 
       def %{value: v1, units: u, denom: []} *
             %{value: v2, units: u2, denom: []} do
-        %ExDimensions.Quantity{value: v1 * v2, units: u ++ u2, denom: []}
+        %ExDimensions.Quantity{value: v1 * v2, units: Enum.sort(u ++ u2), denom: []}
       end
 
       def %{value: v1, units: u, denom: d} *
             %{value: v2, units: u2, denom: d2} do
+        {units, denom} = cancel_units(u ++ u2, d ++ d2)
+
         %ExDimensions.Quantity{
           value: v1 * v2,
-          units: u ++ u2,
-          denom: d ++ d2
+          units: Enum.sort(units),
+          denom: Enum.sort(denom)
         }
       end
 
@@ -70,7 +72,7 @@ defmodule ExDimensions.Math do
 
       def %{value: v1, units: u, denom: []} / %{value: v2, units: u2, denom: []} do
         {units, denom} = cancel_units(u, u2)
-        %ExDimensions.Quantity{value: v1 / v2, units: units, denom: denom}
+        %ExDimensions.Quantity{value: v1 / v2, units: Enum.sort(units), denom: Enum.sort(denom)}
       end
 
       def %{value: v1, units: u, denom: d} > %{value: v2, units: u, denom: d} do

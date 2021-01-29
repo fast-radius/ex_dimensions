@@ -30,6 +30,16 @@ defmodule ExDimensions.Volume do
       ]
     }
 
+  def cm_cubed(q),
+    do: %ExDimensions.Quantity{
+      value: q,
+      units: [
+        ExDimensions.Spatial.Centimeters,
+        ExDimensions.Spatial.Centimeters,
+        ExDimensions.Spatial.Centimeters
+      ]
+    }
+
   def m_cubed(q),
     do: %ExDimensions.Quantity{
       value: q,

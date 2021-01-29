@@ -69,7 +69,7 @@ defmodule ExDimensions.MathTest do
         %ExDimensions.Quantity{value: x, units: [u1]} *
           %ExDimensions.Quantity{value: y, units: [u2]}
 
-      q == %ExDimensions.Quantity{value: x * y, units: [u1, u2]}
+      q == %ExDimensions.Quantity{value: x * y, units: [u1, u2] |> Enum.sort()}
     end
   end
 
@@ -85,6 +85,43 @@ defmodule ExDimensions.MathTest do
             value: x * y
           }
       end
+    end
+  end
+
+  property :multiplcation_cancels_units do
+    for_all {x, y, x_num_exp, x_denom_exp, y_num_exp, y_denom_exp, u1, u2} in {int(), int(),
+             int(), int(), int(), int(),
+             oneof([ExDimensions.Mass.Grams, ExDimensions.Mass.Pounds]),
+             oneof([ExDimensions.Spatial.Millimeters, ExDimensions.Spatial.Inches])} do
+      x_quant = %ExDimensions.Quantity{
+        value: x,
+        units:
+          List.duplicate(u1, max(0, x_num_exp)) ++ List.duplicate(u2, max(0, -1 * x_denom_exp)),
+        denom:
+          List.duplicate(u2, max(0, x_denom_exp)) ++ List.duplicate(u1, max(0, -1 * x_num_exp))
+      }
+
+      y_quant = %ExDimensions.Quantity{
+        value: y,
+        units:
+          List.duplicate(u2, max(0, y_num_exp)) ++ List.duplicate(u1, max(0, -1 * y_denom_exp)),
+        denom:
+          List.duplicate(u1, max(0, y_denom_exp)) ++ List.duplicate(u2, max(0, -1 * y_num_exp))
+      }
+
+      expected = %ExDimensions.Quantity{
+        units:
+          (List.duplicate(u1, max(0, x_num_exp - y_denom_exp)) ++
+             List.duplicate(u2, max(0, y_num_exp - x_denom_exp)))
+          |> Enum.sort(),
+        denom:
+          (List.duplicate(u2, max(0, x_denom_exp - y_num_exp)) ++
+             List.duplicate(u1, max(0, y_denom_exp - x_num_exp)))
+          |> Enum.sort(),
+        value: x * y
+      }
+
+      x_quant * y_quant == expected
     end
   end
 

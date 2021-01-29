@@ -56,6 +56,14 @@ defmodule ExDimensions.Spatial.Millimeters do
   def abbr, do: "mm"
 end
 
+defmodule ExDimensions.Spatial.Centimeters do
+  @moduledoc false
+
+  @behaviour ExDimensions.Unit
+
+  def abbr, do: "cm"
+end
+
 defmodule ExDimensions.Spatial.Meters do
   @moduledoc false
 
