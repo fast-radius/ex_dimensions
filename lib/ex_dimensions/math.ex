@@ -12,6 +12,8 @@ defmodule ExDimensions.Math do
     * Quantities may be multiplied and divided with scalars
     * Quantities with different units that are multiplied and divided will have
       their units changed as needed
+    * When multiplication or division results in a quantity with a mixture of
+      different units in the numerator or denominator, units will be sorted
 
   Any math operations that violate these rules will result in an ArithmeticError
   that will bubble up to the caller.

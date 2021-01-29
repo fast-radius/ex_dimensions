@@ -93,35 +93,41 @@ defmodule ExDimensions.MathTest do
              int(), int(), int(), int(),
              oneof([ExDimensions.Mass.Grams, ExDimensions.Mass.Pounds]),
              oneof([ExDimensions.Spatial.Millimeters, ExDimensions.Spatial.Inches])} do
-      x_quant = %ExDimensions.Quantity{
-        value: x,
-        units:
-          List.duplicate(u1, max(0, x_num_exp)) ++ List.duplicate(u2, max(0, -1 * x_denom_exp)),
-        denom:
-          List.duplicate(u2, max(0, x_denom_exp)) ++ List.duplicate(u1, max(0, -1 * x_num_exp))
-      }
+      implies x_num_exp >= 0 do
+        implies x_denom_exp >= 0 do
+          implies y_num_exp >= 0 do
+            implies y_denom_exp >= 0 do
+              x_quant = %ExDimensions.Quantity{
+                value: x,
+                units: List.duplicate(u1, x_num_exp),
+                denom: List.duplicate(u2, x_denom_exp)
+              }
 
-      y_quant = %ExDimensions.Quantity{
-        value: y,
-        units:
-          List.duplicate(u2, max(0, y_num_exp)) ++ List.duplicate(u1, max(0, -1 * y_denom_exp)),
-        denom:
-          List.duplicate(u1, max(0, y_denom_exp)) ++ List.duplicate(u2, max(0, -1 * y_num_exp))
-      }
+              y_quant = %ExDimensions.Quantity{
+                value: y,
+                units: List.duplicate(u2, y_num_exp),
+                denom: List.duplicate(u1, y_denom_exp)
+              }
 
-      expected = %ExDimensions.Quantity{
-        units:
-          (List.duplicate(u1, max(0, x_num_exp - y_denom_exp)) ++
-             List.duplicate(u2, max(0, y_num_exp - x_denom_exp)))
-          |> Enum.sort(),
-        denom:
-          (List.duplicate(u2, max(0, x_denom_exp - y_num_exp)) ++
-             List.duplicate(u1, max(0, y_denom_exp - x_num_exp)))
-          |> Enum.sort(),
-        value: x * y
-      }
+              expected = %ExDimensions.Quantity{
+                # Numerator includes units from x and y numerators that weren't cancelled out by denominator units.
+                units:
+                  (List.duplicate(u1, max(0, x_num_exp - y_denom_exp)) ++
+                     List.duplicate(u2, max(0, y_num_exp - x_denom_exp)))
+                  |> Enum.sort(),
+                # Denominator includes units from x and y denominators that weren't cancelled out by numerator units.
+                denom:
+                  (List.duplicate(u2, max(0, x_denom_exp - y_num_exp)) ++
+                     List.duplicate(u1, max(0, y_denom_exp - x_num_exp)))
+                  |> Enum.sort(),
+                value: x * y
+              }
 
-      x_quant * y_quant == expected
+              x_quant * y_quant == expected
+            end
+          end
+        end
+      end
     end
   end
 
