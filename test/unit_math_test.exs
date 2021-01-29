@@ -88,7 +88,7 @@ defmodule ExDimensions.MathTest do
     end
   end
 
-  property :multiplcation_cancels_units do
+  property :multiplcation_adds_unit_exponents do
     for_all {x, y, x_num_exp, x_denom_exp, y_num_exp, y_denom_exp, u1, u2} in {int(), int(),
              int(), int(), int(), int(),
              oneof([ExDimensions.Mass.Grams, ExDimensions.Mass.Pounds]),
