@@ -5,7 +5,7 @@ defmodule Units.MixProject do
     [
       app: :ex_dimensions,
       version: "0.2.2",
-      elixir: "~> 1.9",
+      elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       name: "ExDimensions",
