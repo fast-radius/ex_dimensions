@@ -1,6 +1,6 @@
 defmodule ExDimension.ConversionTest do
   use ExDimensions.Math
-  use ExUnit.Case
+  use ExUnit.Case, async: true
 
   import ExDimensions.Conversions
 

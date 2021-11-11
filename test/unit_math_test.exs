@@ -1,5 +1,5 @@
 defmodule ExDimensions.MathTest do
-  use ExUnit.Case, async: false
+  use ExUnit.Case, async: true
   use ExCheck
   use ExDimensions.Math
 

@@ -1,5 +1,5 @@
 defmodule ExDimensions.QuantityTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   use ExDimensions.Math
 
   test "to_string of a basic unit" do

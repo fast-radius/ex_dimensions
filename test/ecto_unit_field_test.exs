@@ -1,5 +1,5 @@
 defmodule ExDimensions.EctoUnitFieldTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
 
   test "deserialization of a basic unit" do
     {:ok, quantity} = ExDimensions.Ecto.UnitField.load(%{"value" => 43, "units" => "ft"})
