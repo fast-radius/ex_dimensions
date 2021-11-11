@@ -4,7 +4,7 @@ defmodule ExDimensions.MathTest do
   use ExDimensions.Math
 
   test "exponent notation for conversion DSL" do
-    assert ExDimensions.Spatial.Inches ^^^ 3 == [
+    assert dimensions(ExDimensions.Spatial.Inches, 3) == [
              ExDimensions.Spatial.Inches,
              ExDimensions.Spatial.Inches,
              ExDimensions.Spatial.Inches

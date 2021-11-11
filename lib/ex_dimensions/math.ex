@@ -104,7 +104,7 @@ defmodule ExDimensions.Math do
         end)
       end
 
-      def u ^^^ num do
+      def dimensions(u, num) do
         List.duplicate(u, num)
       end
 
