@@ -1,7 +1,22 @@
 defmodule ExDimensions.MathTest do
   use ExUnit.Case, async: true
-  use ExCheck
+  use ExUnitProperties
   use ExDimensions.Math
+
+  @metric_lengths [ExDimensions.Spatial.Millimeters, ExDimensions.Spatial.Micrometers]
+  @imperial_lengths [ExDimensions.Spatial.Inches, ExDimensions.Spatial.Feet]
+  @length_units @metric_lengths ++ @imperial_lengths
+  @mass_units [
+    ExDimensions.Mass.Ounces,
+    ExDimensions.Mass.Pounds,
+    ExDimensions.Mass.Grams,
+    ExDimensions.Mass.Kilograms
+  ]
+  @temperature_units [
+    ExDimensions.Temperature.Kelvin,
+    ExDimensions.Temperature.Celsius,
+    ExDimensions.Temperature.Fahrenheit
+  ]
 
   test "exponent notation for conversion DSL" do
     assert dimensions(ExDimensions.Spatial.Inches, 3) == [
@@ -11,49 +26,50 @@ defmodule ExDimensions.MathTest do
            ]
   end
 
-  property :addition_preserves_units do
-    for_all {x, y, u} in {int(), int(),
-             oneof([ExDimensions.Spatial.Millimeters, ExDimensions.Spatial.Inches])} do
+  property "addition_preserves_units" do
+    check all x <- integer(),
+              y <- integer(),
+              u <- one_of(@length_units) do
       %ExDimensions.Quantity{value: x, units: [u]} + %ExDimensions.Quantity{value: y, units: [u]} ==
         %ExDimensions.Quantity{denom: [], units: [u], value: x + y}
     end
   end
 
-  property :addition_of_different_units_not_allowed do
-    for_all {x, u1, u2} in {int(), oneof([ExDimensions.Spatial.Millimeters]),
-             oneof([ExDimensions.Spatial.Inches])} do
-      try do
+  property "addition_of_different_units_not_allowed" do
+    check all x <- integer(),
+              u1 <- one_of(@length_units),
+              u2 <- one_of(@length_units),
+              u1 != u2 do
+      assert_raise ArithmeticError, fn ->
         %ExDimensions.Quantity{value: x, units: u1} + %ExDimensions.Quantity{value: x, units: u2}
-        false
-      rescue
-        ArithmeticError -> true
       end
     end
   end
 
-  property :subtraction_preserves_units do
-    for_all {x, y, u} in {int(), int(),
-             oneof([ExDimensions.Spatial.Millimeters, ExDimensions.Spatial.Inches])} do
+  property "subtraction_preserves_units" do
+    check all x <- integer(),
+              y <- integer(),
+              u <- one_of(@length_units) do
       %ExDimensions.Quantity{value: x, units: [u]} - %ExDimensions.Quantity{value: y, units: [u]} ==
         %ExDimensions.Quantity{denom: [], units: [u], value: x - y}
     end
   end
 
-  property :subtraction_of_different_units_not_allowed do
-    for_all {x, u1, u2} in {int(), oneof([ExDimensions.Spatial.Millimeters]),
-             oneof([ExDimensions.Spatial.Inches])} do
-      try do
+  property "subtraction_of_different_units_not_allowed" do
+    check all x <- integer(),
+              u1 <- one_of(@length_units),
+              u2 <- one_of(@length_units),
+              u1 != u2 do
+      assert_raise ArithmeticError, fn ->
         %ExDimensions.Quantity{value: x, units: u1} - %ExDimensions.Quantity{value: x, units: u2}
-        false
-      rescue
-        ArithmeticError -> true
       end
     end
   end
 
-  property :scalar_multiplication_preserves_units do
-    for_all {x, y, u} in {int(), int(),
-             oneof([ExDimensions.Spatial.Millimeters, ExDimensions.Spatial.Inches])} do
+  property "scalar_multiplication_preserves_units" do
+    check all x <- integer(),
+              y <- integer(),
+              u <- one_of(@length_units) do
       %ExDimensions.Quantity{value: x, units: [u]} * y == %ExDimensions.Quantity{
         value: x * y,
         units: [u]
@@ -61,10 +77,11 @@ defmodule ExDimensions.MathTest do
     end
   end
 
-  property :multiplication_of_different_units_includes_both_units do
-    for_all {x, y, u1, u2} in {int(), int(),
-             oneof([ExDimensions.Spatial.Millimeters, ExDimensions.Spatial.Micrometers]),
-             oneof([ExDimensions.Spatial.Inches, ExDimensions.Spatial.Feet])} do
+  property "multiplication_of_different_units_includes_both_units" do
+    check all x <- integer(),
+              y <- integer(),
+              u1 <- one_of(@metric_lengths),
+              u2 <- one_of(@imperial_lengths) do
       q =
         %ExDimensions.Quantity{value: x, units: [u1]} *
           %ExDimensions.Quantity{value: y, units: [u2]}
@@ -73,63 +90,64 @@ defmodule ExDimensions.MathTest do
     end
   end
 
-  property :multiplication_raises_unit_power do
-    for_all {x, y, exp, u} in {int(), int(), int(),
-             oneof([ExDimensions.Spatial.Millimeters, ExDimensions.Spatial.Inches])} do
-      implies exp > 0 do
-        %ExDimensions.Quantity{value: x, units: List.duplicate(u, exp)} *
-          %ExDimensions.Quantity{value: y, units: List.duplicate(u, exp)} ==
-          %ExDimensions.Quantity{
-            denom: [],
-            units: List.duplicate(u, exp * 2),
-            value: x * y
-          }
-      end
-    end
-  end
-
-  property :scalar_division_preserves_units do
-    for_all {x, y, u} in {int(), int(),
-             oneof([ExDimensions.Spatial.Millimeters, ExDimensions.Spatial.Inches])} do
-      implies y > 0 do
-        %ExDimensions.Quantity{value: x, units: [u]} / y == %ExDimensions.Quantity{
-          value: x / y,
-          units: [u]
+  property "multiplication_raises_unit_power" do
+    check all x <- integer(),
+              y <- integer(),
+              exp <- positive_integer(),
+              u <- one_of(@length_units) do
+      %ExDimensions.Quantity{value: x, units: List.duplicate(u, exp)} *
+        %ExDimensions.Quantity{value: y, units: List.duplicate(u, exp)} ==
+        %ExDimensions.Quantity{
+          denom: [],
+          units: List.duplicate(u, exp * 2),
+          value: x * y
         }
-      end
     end
   end
 
-  property :division_completely_cancels_units_when_they_are_the_same do
-    for_all {x, y, exp, u} in {int(), int(), int(),
-             oneof([ExDimensions.Spatial.Millimeters, ExDimensions.Spatial.Inches])} do
-      implies y > 0 do
-        implies exp > 0 do
-          %ExDimensions.Quantity{value: x, units: List.duplicate(u, exp)} /
-            %ExDimensions.Quantity{value: y, units: List.duplicate(u, exp)} == x / y
-        end
-      end
+  property "scalar_division_preserves_units" do
+    check all x <- integer(),
+              y <- positive_integer(),
+              u <- one_of(@length_units) do
+      %ExDimensions.Quantity{value: x, units: [u]} / y == %ExDimensions.Quantity{
+        value: x / y,
+        units: [u]
+      }
     end
   end
 
-  test "division partially cancels units where appropriate" do
-    q1 = %ExDimensions.Quantity{
-      value: 6,
-      units: [ExDimensions.Spatial.Inches, ExDimensions.Temperature.Kelvin]
-    }
-
-    q2 = %ExDimensions.Quantity{value: 3, units: [ExDimensions.Temperature.Kelvin]}
-
-    assert q1 / q2 == %ExDimensions.Quantity{
-             value: 2.0,
-             units: [ExDimensions.Spatial.Inches],
-             denom: []
-           }
+  property "division_completely_cancels_units_when_they_are_the_same" do
+    check all x <- integer(),
+              y <- positive_integer(),
+              exp <- positive_integer(),
+              u <- one_of(@length_units) do
+      %ExDimensions.Quantity{value: x, units: List.duplicate(u, exp)} /
+        %ExDimensions.Quantity{value: y, units: List.duplicate(u, exp)} == x / y
+    end
   end
 
-  property :comparison_is_correct do
-    for_all {x, y, u} in {int(), int(),
-             oneof([ExDimensions.Spatial.Millimeters, ExDimensions.Spatial.Inches])} do
+  property "division partially cancels units where appropriate" do
+    check all x <- integer(),
+              y <- integer(),
+              y != 0,
+              u1 <- one_of(@length_units),
+              u2 <- one_of([one_of(@temperature_units), one_of(@mass_units)]),
+              u1 != u2 do
+      q1 = %ExDimensions.Quantity{value: x, units: [u1, u2]}
+      q2 = %ExDimensions.Quantity{value: y, units: [u2]}
+
+      assert q1 / q2 == %ExDimensions.Quantity{
+               value: x / y,
+               units: [u1],
+               denom: []
+             }
+    end
+  end
+
+  property "comparison_is_correct" do
+    check all x <- integer(),
+              y <- integer(),
+              u <- one_of(@length_units) do
       %ExDimensions.Quantity{value: x, units: [u]} < %ExDimensions.Quantity{value: y, units: [u]} ==
         x < y
 

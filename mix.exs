@@ -27,11 +27,12 @@ defmodule Units.MixProject do
   defp deps do
     [
       {:ecto_sql, "~> 3.6"},
-      {:excheck, "~> 0.6", only: :test},
       {:ex_doc, "~> 0.19", only: :dev},
       {:jason, "~> 1.0"},
       {:libgraph, "~> 0.13.3"},
       {:nimble_parsec, "~> 0.5.1"},
+      # Dev included for formatter
+      {:stream_data, "~> 0.5.0", only: [:dev, :test], runtime: Mix.env() == :test},
       {:triq, "~> 1.3.0", only: :test}
     ]
   end
