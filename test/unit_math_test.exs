@@ -19,7 +19,7 @@ defmodule ExDimensions.MathTest do
   ]
 
   test "exponent notation for conversion DSL" do
-    assert dimensions(ExDimensions.Spatial.Inches, 3) == [
+    assert pow(ExDimensions.Spatial.Inches, 3) == [
              ExDimensions.Spatial.Inches,
              ExDimensions.Spatial.Inches,
              ExDimensions.Spatial.Inches

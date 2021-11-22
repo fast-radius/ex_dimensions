@@ -18,7 +18,7 @@ defmodule ExDimension.ConversionTest do
 
   test "convert complex units to another" do
     sq_in = ExDimensions.Area.square_inches(4)
-    mm_sq = sq_in ~> dimensions(ExDimensions.Spatial.Millimeters, 2)
+    mm_sq = sq_in ~> pow(ExDimensions.Spatial.Millimeters, 2)
 
     assert %Quantity{
              value: 2580.64,
@@ -26,7 +26,7 @@ defmodule ExDimension.ConversionTest do
            } = mm_sq
 
     cu_in = ExDimensions.Volume.cubic_inches(4)
-    mm_cu = cu_in ~> dimensions(ExDimensions.Spatial.Millimeters, 3)
+    mm_cu = cu_in ~> pow(ExDimensions.Spatial.Millimeters, 3)
 
     assert %Quantity{
              value: 65548.4,
