@@ -2,7 +2,7 @@ defmodule ExDimensions.Parser.UnitTable do
   @moduledoc false
 
   def from_abbr("nm"), do: ExDimensions.Spatial.Nanometers
-  def from_abbr("μm"), do: ExDimensions.Spatial.Micrometers
+  def from_abbr("um"), do: ExDimensions.Spatial.Micrometers
   def from_abbr("mm"), do: ExDimensions.Spatial.Millimeters
   def from_abbr("m"), do: ExDimensions.Spatial.Meters
   def from_abbr("km"), do: ExDimensions.Spatial.Kilometers
@@ -22,13 +22,13 @@ defmodule ExDimensions.Parser do
   # ft^2 <- a compound unit
   # ft^1/s^1 <- a rational unit
   # ft^2/s^2 <- a rational unit made of compound units
-  # 
-  # the ^1 is required despite it being redundant because the 
+  #
+  # the ^1 is required despite it being redundant because the
   # exponent notation is treated as a delimiter
   #
   # the combinators collectively declare that 0..n units
   # followed by an optional "/" for rational units, followed
-  # by 0..n units in the denominator is valid 
+  # by 0..n units in the denominator is valid
   unit_str =
     ascii_string([?a..?z], min: 1)
     |> optional(string("^"))
