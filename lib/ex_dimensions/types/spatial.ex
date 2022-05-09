@@ -45,7 +45,7 @@ defmodule ExDimensions.Spatial.Micrometers do
 
   @behaviour ExDimensions.Unit
 
-  def abbr, do: "μm"
+  def abbr, do: "um"
 end
 
 defmodule ExDimensions.Spatial.Millimeters do
