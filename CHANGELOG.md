@@ -6,5 +6,5 @@ All notable changes to this project will be documented in this file.
 ### Added
    
 ### Changed
-- Breaking Change: units parser parses Micrometers from `um` instead of `μm` (deserialization)
-- Breaking Change: Micrometers are now abbreviated using `um` instead of `μm` (serialization)
+- Breaking Change: `ExDimensions.Parser.UnitTable` parses Micrometers from `um` instead of `μm` (deserialization)
+- Breaking Change: `ExDimensions.Spatial.Micrometers` are now abbreviated using `um` instead of `μm` (serialization)
